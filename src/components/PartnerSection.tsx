@@ -1,4 +1,5 @@
-import { MouseEvent, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
+import type { MouseEvent } from 'react';
 import { Button } from './Button';
 import { marqueeImages } from './data';
 
