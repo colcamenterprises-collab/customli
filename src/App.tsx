@@ -1,4 +1,13 @@
 import { useEffect, useRef } from 'react';
+import { BottomNav } from './components/BottomNav';
+import { CopyrightBar } from './components/CopyrightBar';
+import { Footer } from './components/Footer';
+import { Marquee } from './components/Marquee';
+import { PartnerSection } from './components/PartnerSection';
+import { PricingSection } from './components/PricingSection';
+import { ProjectsSection } from './components/ProjectsSection';
+import { TestimonialCarousel } from './components/TestimonialCarousel';
+import { TestimonialSection } from './components/TestimonialSection';
 
 const logos = ['Vortex', 'Nimbus', 'Prysma', 'Cirrus', 'Kynder', 'Halcyn'];
 const heroVideoSrc =
@@ -116,6 +125,17 @@ export function App() {
           </div>
         </section>
       </div>
+      <div className="studio-content">
+        <Marquee />
+        <TestimonialSection />
+        <PricingSection />
+        <TestimonialCarousel />
+        <ProjectsSection />
+        <PartnerSection />
+        <Footer />
+        <CopyrightBar />
+      </div>
+      <BottomNav />
     </main>
   );
 }
