@@ -1,0 +1,19 @@
+import { useEffect, useState } from 'react';
+import { useInViewAnimation } from '../hooks/useInViewAnimation';
+import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
+
+const testimonials = [
+  ['Marcus Anderson', 'CEO, Data.storage', 'With very little guidance team delivered designs that were consistently spot on...', 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=160'],
+  ['alexwu', 'Founder, Nexgate', 'Viktor led the creation of our best fundraising deck to date!...', 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=160'],
+  ['James Mitchell', 'VP Product, LaunchPad', 'Working with Viktor transformed our product vision...', 'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=160'],
+  ['Rachel Foster', 'Co-founder, Nexus Labs', 'The design quality exceeded our expectations...', 'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=160'],
+  ['David Zhang', 'Head of Design, Paradigm Labs', 'Incredible work from start to finish...', 'https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=160'],
+];
+const items = [...testimonials, ...testimonials, ...testimonials];
+export function TestimonialCarousel() {
+  const { ref, isInView } = useInViewAnimation<HTMLElement>();
+  const [index, setIndex] = useState(0); const [paused, setPaused] = useState(false);
+  useEffect(() => { if (paused) return undefined; const id = window.setInterval(() => setIndex((v) => (v + 1) % testimonials.length), 3000); return () => clearInterval(id); }, [paused]);
+  const anim = isInView ? 'animate-fade-in-up' : 'opacity-0';
+  return <section ref={ref} className="w-full overflow-hidden px-6 py-20 text-[#0D212C]" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}><div className={`${anim} mb-10 ml-auto flex flex-col gap-6 md:max-w-4xl md:flex-row md:items-center md:justify-between`}><h2 className="text-[32px] leading-[1.1] tracking-tight md:text-[40px] lg:text-[44px]">What <span className="font-mondwest">builders</span> say</h2><div className="flex items-center gap-3"><div className="flex">{Array.from({ length: 5 }).map((_, i) => <Star key={i} className="h-5 w-5 fill-black text-black" />)}</div><span>Clutch 5/5</span></div></div><div className="mb-6 flex justify-end gap-3"><button className="flex h-12 w-12 items-center justify-center rounded-full border border-[#0D212C]/20" onClick={() => setIndex((v) => (v - 1 + testimonials.length) % testimonials.length)}><ChevronLeft className="h-5 w-5" /></button><button className="flex h-12 w-12 items-center justify-center rounded-full border border-[#0D212C]/20" onClick={() => setIndex((v) => (v + 1) % testimonials.length)}><ChevronRight className="h-5 w-5" /></button></div><div className="flex gap-6 transition-transform duration-[800ms] ease-[cubic-bezier(0.4,0,0.2,1)]" style={{ transform: `translateX(calc(-${index} * min(427.5px, calc(100vw - 48px))))` }}>{items.map(([name, role, quote, avatar], i) => <article key={`${name}-${i}`} className="w-[calc(100vw-48px)] shrink-0 rounded-[32px] bg-white px-6 py-8 shadow-card md:w-[427.5px] md:rounded-[40px] md:pl-10 md:pr-24"><svg className="mb-6 h-8 w-8" viewBox="0 0 32 32" fill="none"><path d="M13 7C8 9 5 13 5 19c0 4 2 6 5 6 2 0 4-2 4-4s-1-4-4-4c0-3 2-5 5-7l-2-3Zm14 0c-5 2-8 6-8 12 0 4 2 6 5 6 2 0 4-2 4-4s-1-4-4-4c0-3 2-5 5-7l-2-3Z" fill="#0D212C" /></svg><p className="leading-relaxed">{quote}</p><div className="mt-8 flex items-center gap-4"><img src={avatar} alt={name} className="h-12 w-12 rounded-full object-cover" /><div><p className="text-sm font-semibold">{name}</p><p className="text-sm text-[#051A24]/60">→ {role}</p></div></div></article>)}</div></section>;
+}
