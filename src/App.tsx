@@ -1,10 +1,12 @@
 import { useEffect, useRef } from 'react';
+import { BenefitsSection } from './components/BenefitsSection';
 import { BottomNav } from './components/BottomNav';
 import { CopyrightBar } from './components/CopyrightBar';
 import { Footer } from './components/Footer';
 import { Marquee } from './components/Marquee';
 import { PartnerSection } from './components/PartnerSection';
 import { PricingSection } from './components/PricingSection';
+import { ProjectEstimationCalculator } from './components/ProjectEstimationCalculator';
 import { ProjectsSection } from './components/ProjectsSection';
 import { TestimonialCarousel } from './components/TestimonialCarousel';
 import { TestimonialSection } from './components/TestimonialSection';
@@ -132,6 +134,8 @@ export function App() {
         <TestimonialCarousel />
         <ProjectsSection />
         <PartnerSection />
+        <BenefitsSection />
+        <ProjectEstimationCalculator />
         <Footer />
         <CopyrightBar />
       </div>

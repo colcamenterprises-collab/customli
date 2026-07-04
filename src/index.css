@@ -1,3 +1,4 @@
+@import url(https://db.onlinewebfonts.com/c/e55e9079ee863276569c8a68d776ef04?family=Futura+Md+BT+Medium);
 @import url('https://cdn.jsdelivr.net/npm/@fontsource/geist-sans@latest/index.css');
 @import url('https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap');
 
@@ -19,7 +20,15 @@
 * { box-sizing: border-box; }
 
 html, body, #root { min-height: 100%; margin: 0; }
-body { min-width: 320px; overflow-x: hidden; }
+body {
+  min-width: 320px;
+  overflow-x: hidden;
+  font-family: 'Futura Md BT Medium', system-ui, -apple-system, sans-serif;
+  background-color: #000;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 button { font: inherit; }
 
 .page-shell {
@@ -304,3 +313,42 @@ button { font: inherit; }
 
 @keyframes trailFade { 0% { opacity: 0.95; scale: 1; } 100% { opacity: 0; scale: 0.78; } }
 .animate-trail-fade { animation: trailFade 1000ms ease-out forwards; }
+
+.customli-range {
+  height: 0.5rem;
+  appearance: none;
+  border-radius: 9999px;
+  outline: none;
+}
+
+.customli-range:focus-visible {
+  outline: 2px solid #FF5656;
+  outline-offset: 6px;
+}
+
+.customli-range::-webkit-slider-thumb {
+  width: 1.25rem;
+  height: 1.25rem;
+  appearance: none;
+  cursor: pointer;
+  border: 2px solid #ffffff;
+  border-radius: 9999px;
+  background: #FF5656;
+  box-shadow: 0 0 0 4px rgba(255, 86, 86, 0.18);
+}
+
+.customli-range::-moz-range-thumb {
+  width: 1.25rem;
+  height: 1.25rem;
+  cursor: pointer;
+  border: 2px solid #ffffff;
+  border-radius: 9999px;
+  background: #FF5656;
+  box-shadow: 0 0 0 4px rgba(255, 86, 86, 0.18);
+}
+
+.customli-range::-moz-range-track {
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: transparent;
+}
