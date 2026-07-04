@@ -2,7 +2,9 @@ import { useEffect, useRef } from 'react';
 import { BenefitsSection } from './components/BenefitsSection';
 import { BottomNav } from './components/BottomNav';
 import { CopyrightBar } from './components/CopyrightBar';
+import { CtaFooter } from './components/CtaFooter';
 import { Footer } from './components/Footer';
+import { GlowingFeatureCards } from './components/GlowingFeatureCards';
 import { Marquee } from './components/Marquee';
 import { PartnerSection } from './components/PartnerSection';
 import { PricingSection } from './components/PricingSection';
@@ -134,10 +136,12 @@ export function App() {
         <TestimonialCarousel />
         <ProjectsSection />
         <PartnerSection />
-        <BenefitsSection />
-        <ProjectEstimationCalculator />
         <Footer />
         <CopyrightBar />
+        <BenefitsSection />
+        <ProjectEstimationCalculator />
+        <GlowingFeatureCards />
+        <CtaFooter />
       </div>
       <BottomNav />
     </main>
