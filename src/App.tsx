@@ -4,6 +4,7 @@ import { BenefitsSection } from './components/BenefitsSection';
 import { CtaFooter } from './components/CtaFooter';
 import { GlowingFeatureCards } from './components/GlowingFeatureCards';
 import { ProjectEstimationCalculator } from './components/ProjectEstimationCalculator';
+import { MarketeamHero } from './components/MarketeamHero';
 
 const logos = ['Vortex', 'Nimbus', 'Prysma', 'Cirrus', 'Kynder', 'Halcyn'];
 const heroVideoSrc =
@@ -121,6 +122,7 @@ function Hero() {
 export function App() {
   return (
     <main className="page-shell">
+      <MarketeamHero />
       <Hero />
       <div className="studio-content">
         <BenefitsSection />
