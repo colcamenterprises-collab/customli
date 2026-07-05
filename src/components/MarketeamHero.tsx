@@ -51,24 +51,35 @@ function useCountUp(target: number, duration: number, delay: number) {
 function TypewriterHeading({ onComplete }: { onComplete: () => void }) {
   const [visibleCount, setVisibleCount] = useState(0);
   const [isTyping, setIsTyping] = useState(true);
+  const onCompleteRef = useRef(onComplete);
 
   useEffect(() => {
+    onCompleteRef.current = onComplete;
+  }, [onComplete]);
+
+  useEffect(() => {
+    let interval = 0;
     const startTimeout = window.setTimeout(() => {
-      const interval = window.setInterval(() => {
+      interval = window.setInterval(() => {
         setVisibleCount((count) => {
-          if (count >= HEADING_TEXT.length) {
-            clearInterval(interval);
+          const nextCount = Math.min(count + 1, HEADING_TEXT.length);
+
+          if (nextCount === HEADING_TEXT.length) {
+            window.clearInterval(interval);
             setIsTyping(false);
-            onComplete();
-            return count;
+            onCompleteRef.current();
           }
-          return count + 1;
+
+          return nextCount;
         });
       }, 35);
     }, 400);
 
-    return () => clearTimeout(startTimeout);
-  }, [onComplete]);
+    return () => {
+      window.clearTimeout(startTimeout);
+      window.clearInterval(interval);
+    };
+  }, []);
 
   const visible = HEADING_TEXT.slice(0, visibleCount);
   return (
@@ -92,15 +103,14 @@ function MarketeamCircles() {
   const specialists = useCountUp(20, 2000, 1200);
   return (
     <div className="marketeam-circles" aria-label="Marketing specialists network visualization">
-      <div className="marketeam-orbit marketeam-orbit-1 marketeam-spin-ccw">
-        <div className="marketeam-center-card">
-          <strong>{specialists}k+</strong>
-          <span>Specialists</span>
-        </div>
+      <div className="marketeam-orbit marketeam-orbit-1 marketeam-spin-left-30" />
+      <div className="marketeam-orbit marketeam-orbit-2 marketeam-spin-right-40" />
+      <div className="marketeam-orbit marketeam-orbit-3 marketeam-spin-right-50" />
+      <div className="marketeam-orbit marketeam-orbit-4 marketeam-spin-left-60" />
+      <div className="marketeam-center-card">
+        <strong>{specialists}k+</strong>
+        <span>Specialists</span>
       </div>
-      <div className="marketeam-orbit marketeam-orbit-2 marketeam-spin-cw" />
-      <div className="marketeam-orbit marketeam-orbit-3 marketeam-spin-cw" />
-      <div className="marketeam-orbit marketeam-orbit-4 marketeam-spin-ccw" />
       {avatars.map(([url, angle, radius, size, shape, glow], index) => (
         <img
           alt=""
@@ -113,6 +123,7 @@ function MarketeamCircles() {
             '--marketeam-radius': `${radius}px`,
             '--marketeam-size': `${size}px`,
             '--marketeam-delay': `${0.6 + index * 0.2125}s`,
+            '--marketeam-avatar-rotate': `calc(-1 * ${angle}deg)`,
           } as CSSProperties}
         />
       ))}
@@ -138,7 +149,7 @@ export function MarketeamHero() {
 
   return (
     <section className="marketeam-hero" aria-label="Marketeam talent hero">
-      <header className="marketeam-header">
+      <header className="marketeam-header marketeam-fade-down">
         <div className="marketeam-header-left">
           <a className="marketeam-logo-link" href="#" aria-label="Marketeam home">
             <img src="https://polo-pecan-73837341.figma.site/_assets/v11/17ae538989a509947a8de3892c644664895e69b1.png" alt="Marketeam" />
@@ -154,7 +165,7 @@ export function MarketeamHero() {
       </header>
 
       <div className="marketeam-main">
-        <div className="marketeam-copy">
+        <div className="marketeam-copy marketeam-fade-up">
           <TypewriterHeading onComplete={() => setTypingComplete(true)} />
           <div className={`marketeam-start-wrap ${typingComplete ? 'marketeam-visible' : ''}`}>
             <MarketeamButton className="marketeam-start-button">
@@ -167,10 +178,10 @@ export function MarketeamHero() {
             <span>David</span>
           </div>
         </div>
-        <MarketeamCircles />
+        <div className="marketeam-scale-in"><MarketeamCircles /></div>
       </div>
 
-      <MarketeamTicker />
+      <div className="marketeam-delayed-fade-up"><MarketeamTicker /></div>
     </section>
   );
 }
