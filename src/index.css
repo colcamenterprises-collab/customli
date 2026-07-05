@@ -25,14 +25,11 @@ html, body, #root { min-height: 100%; margin: 0; }
 body {
   min-width: 320px;
   overflow-x: hidden;
-  font-family: 'Barlow', 'Futura Md BT Medium', system-ui, -apple-system, sans-serif;
-  background: #000;
+  font-family: 'Futura Md BT Medium', system-ui, -apple-system, sans-serif;
+  background-color: #000;
   color: #fff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-h1, h2, h3 {
-  font-family: 'Instrument Serif', serif;
 }
 button { font: inherit; }
 
@@ -74,7 +71,7 @@ button { font: inherit; }
 .page-shell {
   position: relative;
   min-height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
   background: hsl(var(--background));
 }
 
